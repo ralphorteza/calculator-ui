@@ -1,0 +1,6 @@
+.container {
+  display: flex;
+  margin: 2px;
+  color:blue;
+  background-color: black;
+}
