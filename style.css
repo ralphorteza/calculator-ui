@@ -26,9 +26,25 @@
 }
 
 .row {
-  height: 80px;
+  display: flex;
+  height: 90px;
+  gap: 10px;
 /*   width: auto; */
 /*   margin: 5px; */
+  /* background-color: aquamarine; */
+}
+
+.btn {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  
   background-color: aquamarine;
+
+}
+
+.clear {
+  flex: 2.1;
 }
 
