@@ -12,7 +12,7 @@ function operate(num1, num2, op) {
 
   return result;
 }
-window.addEventListener('keydown', function(e) {
+/* window.addEventListener('keydown', function(e) {
   //const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
   const pressedKey = e.key;
   const key = this.document.querySelector('.key ' + pressedKey);
@@ -23,6 +23,8 @@ window.addEventListener('keydown', function(e) {
   //console.log(pressedKey);
   //btn.classList.add('playing');
 });
+ */
+
 
 function removeTransition(e) {
   if (e.propertyName !== 'transform') return;
