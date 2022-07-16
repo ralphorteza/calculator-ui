@@ -12,3 +12,14 @@ function operate(num1, num2, op) {
 
   return result;
 }
+
+const btns = document.querySelectorAll('btn');
+const display = document.getElementById('diplay');
+console.log(btns);
+
+btns.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    console.log('clicked');
+    console.log(e.id);
+  });
+});
