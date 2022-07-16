@@ -13,13 +13,18 @@ function operate(num1, num2, op) {
   return result;
 }
 
-const btns = document.querySelectorAll('btn');
-const display = document.getElementById('diplay');
-console.log(btns);
+const btns = document.querySelectorAll('button');
+const display = document.getElementsByClassName('display');
+console.log(display.textContent);
 
 btns.forEach((button) => {
   button.addEventListener('click', (e) => {
     console.log('clicked');
-    console.log(e.id);
+    console.log(button.textContent);
+    console.log(e.target);
+    let value = button.textContent;
+    console.log(value);
+    display.textContent += `${value}`;
+    console.log(display.textContent);
   });
 });
