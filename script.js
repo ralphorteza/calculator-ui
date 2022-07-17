@@ -57,9 +57,12 @@ function buttonPress(e) {
     num2 = unprocessedStr.slice(1);
     console.log("op2",num2);
     ans = operate(num1, num2, operator);
+    num1 = ans;
+    console.log("op1 in equals",num1);
     clearDisplay();
     updateDisplay(ans);
-    str = "";
+    str = num1;
+    console.log(str);
   } else if (value.match(regexOperators)) {
     operator = value;
     num1 = str;
