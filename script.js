@@ -4,6 +4,9 @@ let num2 = "";
 let operator = "";
 let ans = "";
 
+const regexNumbers = /[0-9]/g;
+const regexOperators = /[%*+/-]/g;
+const regexEquals = /[=]/g;
 
 
 /* operator functions */
@@ -20,12 +23,14 @@ const mod = (a,b) => a % b;
 function operate(num1, num2, operator) { 
   let op1 = parseFloat(num1);
   let op2 = parseFloat(num2);
-  
-  if (operator === "+") { return add(op1,op2); }
-  if (operator === "-") { return sub(op1,op2); }
-  if (operator === "*") { return mlt(op1,op2); }
-  if (operator === "/") { return div(op1,op2); }
-  if (operator === "%") { return mod(op1,op2); }
+  let result = 0;
+  if (operator === "+") { result = add(op1,op2); }
+  if (operator === "-") { result = sub(op1,op2); }
+  if (operator === "*") { result = mlt(op1,op2); }
+  if (operator === "/") { result = div(op1,op2); }
+  if (operator === "%") { result = mod(op1,op2); }
+
+  return result;
 }
 
 function clearDisplay() {
@@ -43,13 +48,34 @@ function updateDisplay(val) {
   console.log(display.textContent);
 }
 
-
-
 function buttonPress(e) {
   console.log('clicked');
   let value = e.target.textContent;
-  str += value;
-  updateDisplay(str);
+  if (value.match(regexEquals)) {
+    let unprocessed = str.match(/[%*+/-](.*)/g);
+    let unprocessedStr= unprocessed[0];
+    num2 = unprocessedStr.slice(1);
+    console.log("op2",num2);
+    ans = operate(num1, num2, operator);
+    clearDisplay();
+    updateDisplay(ans);
+    str = "";
+  } else if (value.match(regexOperators)) {
+    operator = value;
+    num1 = str;
+    console.log("op1",num1);
+    console.log("operator", operator);
+    str += value;
+    updateDisplay(str);
+  } else if (value === "clear") {
+    clearDisplay();
+  } else if (value === "backspace") {
+    backSpace();
+  } else {
+    str += value;
+    updateDisplay(str);
+  }
+
 }
 
 const btns = document.querySelectorAll('button');
