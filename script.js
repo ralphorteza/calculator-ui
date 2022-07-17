@@ -29,7 +29,6 @@ function operate(num1, num2, operator) {
   if (operator === "*") { result = mlt(op1,op2); }
   if (operator === "/") { result = div(op1,op2); }
   if (operator === "%") { result = mod(op1,op2); }
-
   return result;
 }
 
@@ -41,6 +40,7 @@ function clearDisplay() {
 function backSpace() {
   str = str.substring(0, str.length-1); // remove last character.
   updateDisplay(str);
+  console.log(updateDisplay(str));
 }
 
 function updateDisplay(val) {
@@ -48,24 +48,33 @@ function updateDisplay(val) {
   console.log(display.textContent);
 }
 
+function getOperand2() {
+  let unprocessed = str.match(/[%*+/-](.*)/g);
+  let unprocessedStr = unprocessed[0];
+  return unprocessedStr.slice(1);
+}
+
 function buttonPress(e) {
   console.log('clicked');
   let value = e.target.textContent;
   if (value.match(regexEquals)) {
-    let unprocessed = str.match(/[%*+/-](.*)/g);
-    let unprocessedStr= unprocessed[0];
-    num2 = unprocessedStr.slice(1);
+    num2 = getOperand2();
     console.log("op2",num2);
     ans = operate(num1, num2, operator);
     num1 = ans;
-    console.log("op1 in equals",num1);
+    str = ans;
+    console.log("op1 in equals", num1);
+    console.log(str);
     clearDisplay();
     updateDisplay(ans);
-    str = num1;
     console.log(str);
   } else if (value.match(regexOperators)) {
     operator = value;
-    num1 = str;
+    if (str !== "") { num1 = str; updateDisplay(num1); }
+    else { 
+      num1 = ans;
+      
+     }
     console.log("op1",num1);
     console.log("operator", operator);
     str += value;
