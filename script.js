@@ -19,7 +19,7 @@ const div = function(a,b) {
 }
 const mod = (a,b) => a % b;
 
-
+/* Function to do operations of two given numbers. */
 function operate(num1, num2, operator) { 
   let op1 = parseFloat(num1);
   let op2 = parseFloat(num2);
@@ -32,18 +32,24 @@ function operate(num1, num2, operator) {
   return result;
 }
 
+/* Function to clear display and assigned variables. */
 function clearDisplay() {
+  let clearString = "";
+  updateDisplay(clearString);
+}
+
+function clearAssignVars() {
   str = "";
   num1 = "";
   num2 = "";
   operator = "";
   ans = "";
-  updateDisplay(str);
 }
 
-function backSpace() {
-  str = str.substring(0, str.length-1); // remove last character.
-  updateDisplay(str);
+function backSpace(value) {
+  let updateString = value.substring(0, value.length-1); // remove last character.
+  str = updateString;
+  updateDisplay(updateString);
 }
 
 function updateDisplay(val) {
@@ -57,20 +63,22 @@ function getOperand2() {
   return unprocessedStr.slice(1);
 }
 
+function getAns() {
+  num2 = getOperand2();
+  ans = operate(num1, num2, operator);
+  console.log(num1 + "" + operator + "" + num2 + "=" + ans);
+  num1 = ans;
+  str = ans;
+  console.log(str);
+  clearDisplay();
+  updateDisplay(str);
+}
+
 function buttonPress(e) {
   console.log('clicked');
   let value = e.target.textContent;
   if (value.match(regexEquals)) {
-    num2 = getOperand2();
-    console.log("op2",num2);
-    ans = operate(num1, num2, operator);
-    num1 = ans;
-    str = ans;
-    console.log("op1 in equals", num1);
-    console.log(str);
-    clearDisplay();
-    updateDisplay(ans);
-    console.log(str);
+    getAns();
   } else if (value.match(regexOperators)) {
     operator = value;
     if (str !== "") { 
@@ -86,7 +94,7 @@ function buttonPress(e) {
   } else if (value === "clear") {
     clearDisplay();
   } else if (value === "backspace") {
-    backSpace();
+    backSpace(str);
   } else {
     str += value;
     updateDisplay(str);
