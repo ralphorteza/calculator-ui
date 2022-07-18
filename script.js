@@ -38,6 +38,7 @@ function clearDisplay() {
   updateDisplay(clearString);
 }
 
+/* Resets variables to intial assignments. */
 function clearAssignVars() {
   str = "";
   num1 = "";
@@ -46,27 +47,31 @@ function clearAssignVars() {
   ans = "";
 }
 
+/* Function to remove the last character of displayed String. */
 function backSpace(value) {
   let updateString = value.substring(0, value.length-1); // remove last character.
   str = updateString;
-  updateDisplay(updateString);
+  updateDisplay(str);
 }
 
+/* Function to update the display. */
 function updateDisplay(val) {
   display.textContent = val;
   console.log(display.textContent);
 }
 
-function getOperand2() {
-  let unprocessed = str.match(/[%*+/-](.*)/g);
+/* Function to get the second number to operate. */
+function getOperand2(val) {
+  let unprocessed = val.match(/[%*+/-](.*)/g);
   let unprocessedStr = unprocessed[0];
   return unprocessedStr.slice(1);
 }
 
+/* Function to retrieve ans and others after pressing '=' */
 function getAns() {
-  num2 = getOperand2();
+  num2 = getOperand2(str);
   ans = operate(num1, num2, operator);
-  console.log(num1 + "" + operator + "" + num2 + "=" + ans);
+  console.log(num1 + " " + operator + " " + num2 + " = " + ans);
   num1 = ans;
   str = ans;
   console.log(str);
@@ -74,25 +79,31 @@ function getAns() {
   updateDisplay(str);
 }
 
+/* Function to assign the operator update String. */
+function assignOperator(val) {
+  operator = val;
+  if (str !== "") { 
+    num1 = str; 
+  } else { 
+    num1 = ans;
+  }
+  console.log("op1", num1);
+  console.log("operator", operator);
+  str += val;
+  updateDisplay(str);
+}
+
 function buttonPress(e) {
   console.log('clicked');
   let value = e.target.textContent;
+
   if (value.match(regexEquals)) {
     getAns();
   } else if (value.match(regexOperators)) {
-    operator = value;
-    if (str !== "") { 
-      num1 = str; 
-      //updateDisplay(num1);
-    } else { 
-      num1 = ans;
-    }
-    console.log("op1", num1);
-    console.log("operator", operator);
-    str += value;
-    updateDisplay(str);
+    assignOperator(value);
   } else if (value === "clear") {
     clearDisplay();
+    clearAssignVars();
   } else if (value === "backspace") {
     backSpace(str);
   } else {
