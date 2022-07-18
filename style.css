@@ -19,27 +19,33 @@
   flex-direction: column;
   align-self: center;
   
-  gap: 10px;
+  gap: 5px;
   background-color: #2f3740;
   padding: 12px;
   height: 600px;
   width: 400px;
+
+  border-radius: 20px;
 }
 
 .display {
-  min-height: 140px;
+  min-height: 165px;
   background-color: #d0cccf;
   text-align: right;
   color: #4188eb;
   font-size: 80px;
   padding-right: 25px;
   padding: 25px;
+
+  border-radius: 20px;
+
+  margin-bottom: 15px;
 }
 
 .row {
   display: flex;
-  height: 90px;
-  gap: 10px;
+  height: 75px;
+  gap: 5px;
 }
 
 .button {
@@ -49,10 +55,11 @@
   align-items: center;
   background-color: #d5d1d1;
   
-  border: 1px solid black;
+  /* border: 1px solid black; */
   transition: all 0.07s;
   text-align: center;
-  color: black;
+
+  border-radius: 20px;
 }
 
 .button.calculate {
@@ -89,8 +96,7 @@ button {
   width: 100%;
   height: 100%;
 
-
-  /* color: bisque; */
+  border-radius: 20px;
 }
 
 
