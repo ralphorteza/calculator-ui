@@ -64,8 +64,7 @@ function buttonPress(e) {
     num1 = ans;
     str = ans;
     console.log("op1 in equals", num1);
-    console.log(str);
-    clearDisplay();
+    console.log("str:",str);
     updateDisplay(ans);
     console.log(str);
   } else if (value.match(regexOperators)) {
@@ -73,7 +72,7 @@ function buttonPress(e) {
     if (str !== "") { num1 = str; updateDisplay(num1); }
     else { 
       num1 = ans;
-      
+      console.log("num1 = ans:", num1);
      }
     console.log("op1",num1);
     console.log("operator", operator);
