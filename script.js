@@ -34,13 +34,16 @@ function operate(num1, num2, operator) {
 
 function clearDisplay() {
   str = "";
+  num1 = "";
+  num2 = "";
+  operator = "";
+  ans = "";
   updateDisplay(str);
 }
 
 function backSpace() {
   str = str.substring(0, str.length-1); // remove last character.
   updateDisplay(str);
-  console.log(updateDisplay(str));
 }
 
 function updateDisplay(val) {
@@ -70,12 +73,13 @@ function buttonPress(e) {
     console.log(str);
   } else if (value.match(regexOperators)) {
     operator = value;
-    if (str !== "") { num1 = str; updateDisplay(num1); }
-    else { 
+    if (str !== "") { 
+      num1 = str; 
+      //updateDisplay(num1);
+    } else { 
       num1 = ans;
-      
-     }
-    console.log("op1",num1);
+    }
+    console.log("op1", num1);
     console.log("operator", operator);
     str += value;
     updateDisplay(str);
