@@ -101,10 +101,10 @@ function buttonPress(e) {
     getAns();
   } else if (value.match(regexOperators)) {
     assignOperator(value);
-  } else if (value === "clear") {
+  } else if (value === "AC") {
     clearDisplay();
     clearAssignVars();
-  } else if (value === "backspace") {
+  } else if (value === "DEL") {
     backSpace(str);
   } else {
     str += value;
