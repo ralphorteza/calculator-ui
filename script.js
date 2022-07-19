@@ -54,6 +54,7 @@ function clearAssignVars() {
 
 /* Function to remove the last character of displayed String. */
 function backSpace(value) {
+  value = String (value);
   let updateString = value.substring(0, value.length-1); // remove last character.
   currentString = updateString;
   updateDisplay(currentString);
