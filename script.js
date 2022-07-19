@@ -24,7 +24,7 @@ const div = function(a,b) {
 function operate(num1, num2, operator) { 
   let op1 = Number(num1);
   let op2 = Number(num2);
-  let result = 0;
+  let result = 1;
   if (operator === "+") { result = add(op1,op2); }
   if (operator === "-") { result = sub(op1,op2); }
   if (operator === "*") { result = mlt(op1,op2); }
@@ -68,16 +68,20 @@ function updateDisplay(val) {
 
 /* Function to get the second number to operate. */
 function getOperand2(val) {
-  let unprocessed = val.match(/[%*+/-](.*)/g);
-  let unprocessedStr = unprocessed[0];
-  let temp = Number (unprocessedStr.slice(1));
-  console.log(typeof temp);
-  return temp;
+  val = String (val);
+  if (val.match(/[%*+/-](.*)/g)) {
+    let unprocessed = val.match(/[%*+/-](.*)/g);
+    let unprocessedStr = unprocessed[0];
+    let temp = Number (unprocessedStr.slice(1));
+    return temp;
+  } else {
+    return 0;
+  }
 }
 
 /* Function to retrieve ans and others after pressing '=' */
 function getAns() {
-  num2 = getOperand2(currentString);
+  /* num2 = getOperand2(currentString); */
   ans = operate(num1, num2, operator);
   console.log(num1 + " " + operator + " " + num2 + " = " + ans);
   num1 = ans;
@@ -106,7 +110,10 @@ function buttonPress(e) {
   let value = e.target.textContent;
 
   if (value.match(regexEquals)) {
-    getAns();
+    if (checkOperation() !== true) {
+      num2 = getOperand2(currentString);
+      getAns();
+    } 
   } else if (value.match(regexOperators)) {
     assignOperator(value);
   } else if (value === "AC") {
