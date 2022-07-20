@@ -28,10 +28,10 @@ function operate(num1, num2, operator) {
   let op2 = Number(num2);
   let result = 1;
   if (operator === "+") { result = add(op1,op2); }
-  if (operator === "-") { result = sub(op1,op2); }
-  if (operator === "*") { result = mlt(op1,op2); }
-  if (operator === "/") { result = div(op1,op2); }
-  if (operator === "%") { result = mod(op1,op2); }
+  else if (operator === "-") { result = sub(op1,op2); }
+  else if (operator === "*") { result = mlt(op1,op2); }
+  else if (operator === "/") { result = div(op1,op2); }
+  else if (operator === "%") { result = mod(op1,op2); }
   
   if (typeof result === "string") {
     return result;
@@ -100,6 +100,7 @@ function getAns() {
     currentString = Number(ans);
     console.log("current String: " + currentString);
     clearDisplay();
+    operator = "";
     updateDisplay(currentString);
   } else {
     clearDisplay();
@@ -108,8 +109,14 @@ function getAns() {
   }
 }
 
+function operatorNotAssigned() {
+  return operator === "";
+}
+
 /* Function to assign the operator update String. */
 function assignOperator(val) {
+  
+
   operator = val;
   if (currentString !== "") { 
     num1 = Number(currentString); 
@@ -120,6 +127,7 @@ function assignOperator(val) {
   console.log("operator", operator);
   currentString += val;
   updateDisplay(currentString);
+
 }
 
 function checkStringSize() {
@@ -156,7 +164,10 @@ function buttonPress(e) {
       getAns();
     } 
   } else if (value.match(regexOperators)) {
-    assignOperator(value);
+    if (operatorNotAssigned() == true) {
+      assignOperator(value);
+    }
+    updateDisplay(currentString);
   } else if (value === "AC") {
     clear();
   } else if (value === "DEL") {
