@@ -119,11 +119,31 @@ function assignOperator(val) {
   updateDisplay(currentString);
 }
 
+function checkStringSize() {
+  return currentString.length >= 7;
+}
+
+function checkValueException(value) {
+  if (value === "DEL") {
+    backSpace(currentString);
+  } else if (value === "AC") {
+    clearDisplay();
+    clearAssignVars();
+  } else if (value === "=") {
+    num2 = getOperand2(currentString);
+    getAns();
+  }else {
+    updateDisplay(currentString);
+  }
+}
+
 function buttonPress(e) {
   console.log('clicked');
   let value = e.target.textContent;
 
-  if (value.match(regexEquals)) {
+  if (checkStringSize() === true) {
+      checkValueException(value);
+  } else if (value.match(regexEquals)) {
     if (checkOperation() !== true) {
       num2 = getOperand2(currentString);
       getAns();
