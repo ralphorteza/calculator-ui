@@ -8,7 +8,7 @@ const ErrorStr = "Syntax Error";
 const regexNumbers = /[0-9]/g;
 const regexOperators = /[%*+/-]/g;
 const regexEquals = /[=]/g;
-
+const regexlol = /lol/g;
 
 /* operator functions */
 const mod = (a,b) => a % b;
@@ -16,6 +16,8 @@ const add = (a, b) => a + b;
 const sub = (a,b) => a - b;
 const mlt = (a,b) => a * b;
 const div = function(a,b) {
+  console.log("a type of: " + typeof a);
+  console.log("b type of: " + typeof b)
   if (b !== 0) { return a / b;}
   return "lol";
 }
@@ -30,7 +32,12 @@ function operate(num1, num2, operator) {
   if (operator === "*") { result = mlt(op1,op2); }
   if (operator === "/") { result = div(op1,op2); }
   if (operator === "%") { result = mod(op1,op2); }
-  return result.toFixed(2);
+  
+  if (typeof result === "string") {
+    return result;
+  } else {
+    return result.toFixed(2);
+  }
 }
 
 function checkOperation() {
@@ -82,13 +89,20 @@ function getOperand2(val) {
 /* Function to retrieve ans and others after pressing '=' */
 function getAns() {
   /* num2 = getOperand2(currentString); */
-  ans = operate(num1, num2, operator);
-  console.log(num1 + " " + operator + " " + num2 + " = " + ans);
-  num1 = ans;
-  currentString = Number(ans);
-  console.log("current String: " + currentString);
-  clearDisplay();
-  updateDisplay(currentString);
+  let temp = operate(num1, num2, operator);
+  ans = temp;
+  if (!ans.match(regexlol)) {
+    console.log(num1 + " " + operator + " " + num2 + " = " + ans);
+    num1 = ans;
+    currentString = Number(ans);
+    console.log("current String: " + currentString);
+    clearDisplay();
+    updateDisplay(currentString);
+  } else {
+    clearDisplay();
+    updateDisplay(ans);
+    clearAssignVars();
+  }
 }
 
 /* Function to assign the operator update String. */
