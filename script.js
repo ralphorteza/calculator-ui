@@ -123,12 +123,16 @@ function checkStringSize() {
   return currentString.length >= 7;
 }
 
+function clear() {
+  clearDisplay();
+  clearAssignVars();
+}
+
 function checkValueException(value) {
   if (value === "DEL") {
     backSpace(currentString);
   } else if (value === "AC") {
-    clearDisplay();
-    clearAssignVars();
+    clear();
   } else if (value === "=") {
     num2 = getOperand2(currentString);
     getAns();
@@ -151,8 +155,7 @@ function buttonPress(e) {
   } else if (value.match(regexOperators)) {
     assignOperator(value);
   } else if (value === "AC") {
-    clearDisplay();
-    clearAssignVars();
+    clear();
   } else if (value === "DEL") {
     backSpace(currentString);
   } else {
