@@ -115,8 +115,6 @@ function operatorNotAssigned() {
 
 /* Function to assign the operator update String. */
 function assignOperator(val) {
-  
-
   operator = val;
   if (currentString !== "") { 
     num1 = Number(currentString); 
@@ -134,11 +132,13 @@ function checkStringSize() {
   return currentString.length >= 7;
 }
 
+// Function as the AC button
 function clear() {
   clearDisplay();
   clearAssignVars();
 }
 
+// Function to check value exception when String size is over limit.
 function checkValueException(value) {
   if (value === "DEL") {
     backSpace(currentString);
