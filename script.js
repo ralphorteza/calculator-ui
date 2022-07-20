@@ -76,11 +76,14 @@ function updateDisplay(val) {
 /* Function to get the second number to operate. */
 function getOperand2(val) {
   val = String (val);
-  if (val.match(/[%*+/-](.*)/g)) {
+  if (val.match(/[%*+/-](.[0-9]{0,})/g)) {
     let unprocessed = val.match(/[%*+/-](.*)/g);
     let unprocessedStr = unprocessed[0];
     let temp = Number (unprocessedStr.slice(1));
+    console.log("temp: " + temp);
     return temp;
+  } else if(val.match(/[*/]/g)) {
+    return 1;
   } else {
     return 0;
   }
